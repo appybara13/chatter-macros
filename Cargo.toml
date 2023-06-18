@@ -1,0 +1,23 @@
+[package]
+name = "chatter-macros"
+version = "0.1.0"
+edition = "2021"
+authors = ["appybara13"]
+repository = "https://github.com/appybara13/chatter-macros"
+homepage = "https://github.com/appybara13/chatter-macros"
+license = "MIT"
+description = "Proc macro for parsing chatter"
+readme = "README.md"
+keywords = ["gamedev", "narrative", "dialogue", "chatter"]
+categories = ["game-development", "text-processing", "parser-implementations"]
+include = ["Cargo.toml", "README.md", "LICENSE", "src/*"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+pest = "2.6"
+pest_derive = "2.6"
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = "2.0"

@@ -1,0 +1,25 @@
+chatter = _{ SOI ~ newline* ~ (content ~ newline+)* ~ content? ~ newline* ~ EOI }
+
+content = _{ goto | choices | branch | line }
+
+line = { tags? ~ text ~ goto? }
+
+choices = { (choice ~ newline)* ~ choice }
+choice = { "-" ~ tags? ~ text ~ goto? }
+
+goto = { "->" ~ branch_label }
+branch = {"#" ~ branch_label }
+branch_label = @{ (ASCII_ALPHANUMERIC | "_")+ }
+
+tags = ${ "[" ~ (tag ~ tag_separator*)* ~ "]" }
+tag = { (ASCII_ALPHANUMERIC | "_")+ }
+tag_separator = _{ "," | WHITESPACE }
+
+text = @{ first_char ~ char* }
+first_char = {!("-" | "#" | newline) ~ ANY}
+char = {!(" ->" | "->" | newline) ~ ANY}
+
+newline = _{"\n"}
+
+WHITESPACE = _{ " " | "\t" }
+COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
